@@ -1,4 +1,4 @@
-# ranksol-landing-starter
+# landing-starter
 
 A **GitHub Template repo** for building premium, scroll-driven, 3D-capable interactive
 landing pages (real estate, product launch, agency) with Claude Code.
