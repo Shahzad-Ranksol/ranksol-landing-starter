@@ -17,9 +17,20 @@ bundled docs — `node_modules/next/dist/docs/01-app/03-api-reference/03-file-co
 explicitly says the `middleware` convention is deprecated). The exported function can still be a
 default export with the old `(request) => response` signature — only the filename and the
 `config.matcher` placement changed, `createMiddleware(routing)` from `next-intl/middleware` still
-works unchanged inside it. This whole surface still moves fast — if the installed Next.js major
-version differs from 16, check that package's own bundled docs (or Context7 MCP) before trusting
-the filename below rather than assuming it's stayed `proxy.ts`.
+works unchanged inside it.
+
+🔥 **Use `middleware.ts`, not `proxy.ts`, for anything actually deployed to Vercel right now.**
+Confirmed directly in production: a next-intl app using `proxy.ts` built and ran fine locally
+(`next dev` and `next build && next start`), but on Vercel every route **except** the ones
+matching the locale prefix 404'd — `/` 404'd, `/en` worked — because the proxy never executed to
+redirect the bare path. This matches a live, actively-tracked class of Next.js 16 issues
+(`vercel/next.js` #85243, #86122; Vercel Community "middleware returns 404 sitewide on Vercel").
+Renaming the file back to `middleware.ts` (identical contents, just the filename) fixed it
+immediately — `next build` only emits a deprecation warning, not an error, and the route is
+still listed as `ƒ Proxy (Middleware)` in the build output either way. This whole surface still
+moves fast — before trusting either filename, check whether this is still an open issue (search
+`next.js proxy.ts vercel 404` for the current state) rather than assuming this note is still
+accurate.
 
 ## When to use
 
@@ -72,8 +83,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
 })
 ```
 
-`proxy.ts` at the project root (Next.js 15 and earlier: `middleware.ts`, same content) — matches
-every path except static assets/API routes:
+`middleware.ts` at the project root — matches every path except static assets/API routes. Next.js
+16 nominally renamed this to `proxy.ts`, but use `middleware.ts` anyway per the note above until
+the Vercel production execution issue is confirmed resolved:
 
 ```ts
 import createMiddleware from 'next-intl/middleware'
