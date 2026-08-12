@@ -11,9 +11,18 @@ items block the hardest phases, so chase them first.
 
 ## Content & data
 - [ ] Floor & unit data: numbering, sizes (m²), layout type, availability, prices
-- [ ] Points of interest for the location map + walk/drive times
-- [ ] Amenities list, installment/payment plan steps
+- [ ] Amenities list (name, icon/photo, short description), installment/payment plan steps
 - [ ] PDFs to link (permits, brochures, floor plans)
+- [ ] Who will edit this data day-to-day after launch? (sales team via a CMS, or dev/agency
+      via code updates — determines whether we set up Sanity/Payload or keep it static)
+
+## Location map
+- [ ] Exact site address + coordinates
+- [ ] Points of interest: name, category (school/transit/shopping/etc.), and walk + drive time
+      for each — please provide this list, we can't source it for you
+- [ ] Map provider preference (Mapbox by default, or Google Maps) — grant account access or
+      create the account and invite us
+- [ ] Any required brand styling for the map itself (colors, custom pin icons)
 
 ## Brand & media
 - [ ] Logo (SVG preferred) + brand colors + fonts / brand guidelines

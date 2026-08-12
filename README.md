@@ -33,12 +33,21 @@ client-asset checklist.
 ```
 .claude/
   skills/
-    interactive-landing-page/
-      SKILL.md          ← the playbook (stack, roadmap, MCPs, asset checklist)
+    interactive-landing-page/   ← the playbook (stack, roadmap, MCPs, asset checklist)
+    nextjs-app-scaffold/        ← App Router folder conventions, TS/Tailwind config, Vercel env
+    scroll-animation/           ← Lenis + GSAP ScrollTrigger + Framer Motion recipes
+    r3f-3d-viewer/               ← R3F/GLTF viewer: gltfjsx, clickable meshes, camera, perf
+    i18n-nextintl/               ← locale routing, message files, language switcher
+    interactive-map/             ← Mapbox GL JS, custom POI markers, distance/time panel
+    cms-content-model/           ← Sanity/Payload schema for unit/floor/availability/POI/amenity
+    perf-web/                    ← next/image, dynamic-import off critical path, CWV budget
 docs/
   CLIENT-ASSET-CHECKLIST.md   ← send to the client before build starts
 README.md
 ```
+
+All 7 companion skills listed inside `interactive-landing-page` (§3) are built. The main skill
+is the index; invoke the others by name when working on that specific part of the build.
 
 ## Keeping it current
 
@@ -50,5 +59,6 @@ next project (fresh `Use this template`).
 ## Adding more skills later
 
 Each new skill is its own folder with a `SKILL.md`:
-`.claude/skills/<skill-name>/SKILL.md`. The natural next ones are `scroll-animation` and
-`r3f-3d-viewer` (code recipes), listed as "to build" inside the main skill.
+`.claude/skills/<skill-name>/SKILL.md`. The roadmap skills are all built (see tree above);
+add new ones here as new recurring needs come up across projects (e.g. a payments/checkout
+flow, a different CMS, a booking calendar) rather than one-off project-specific detail.
