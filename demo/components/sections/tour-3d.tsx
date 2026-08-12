@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { floors, tierInfo } from "@/lib/data/floors";
-import { getFloorSummary } from "@/lib/data/units";
+import { tierInfo, type Tier } from "@/lib/data/floors";
+import { getTierSummary } from "@/lib/data/units";
 import { Reveal } from "@/components/ui/reveal";
 import { Magnetic } from "@/components/ui/magnetic-button";
 
@@ -29,12 +29,11 @@ const currency = new Intl.NumberFormat("en-US", {
 
 export function Tour3D() {
   const t = useTranslations("tour3d");
-  const [selectedId, setSelectedId] = useState<string | null>("l7");
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [selectedTier, setSelectedTier] = useState<Tier | null>("crown");
+  const [hoveredTier, setHoveredTier] = useState<Tier | null>(null);
 
-  const activeId = hoveredId ?? selectedId;
-  const activeFloor = floors.find((f) => f.id === activeId) ?? null;
-  const summary = activeFloor ? getFloorSummary(activeFloor.id) : null;
+  const activeTier = hoveredTier ?? selectedTier;
+  const summary = activeTier ? getTierSummary(tierInfo[activeTier].label) : null;
 
   return (
     <section id="tour3d" className="border-t border-ink-line bg-ink px-6 py-28 md:px-12">
@@ -52,23 +51,23 @@ export function Tour3D() {
             {t("hint")}
           </div>
           <BuildingScene
-            selectedId={selectedId}
-            hoveredId={hoveredId}
-            onSelect={setSelectedId}
-            onHover={setHoveredId}
+            selectedTier={selectedTier}
+            hoveredTier={hoveredTier}
+            onSelect={setSelectedTier}
+            onHover={setHoveredTier}
           />
         </div>
 
         <div className="border border-ink-line bg-ink-soft p-6">
           <div className="flex items-center justify-between border-b border-ink-line pb-4 font-mono text-xs uppercase tracking-widest text-cream-dim">
             <span>{t("levelDetails")}</span>
-            <span className="text-clay">{activeFloor?.label ?? "—"}</span>
+            <span className="text-clay">{activeTier ? tierInfo[activeTier].label.split(" ")[0] : "—"}</span>
           </div>
 
-          {activeFloor && summary ? (
+          {activeTier && summary ? (
             <div className="pt-4">
-              <p className="font-display text-2xl text-cream">{tierInfo[activeFloor.tier].label}</p>
-              <p className="mt-1 text-sm text-cream-dim">{tierInfo[activeFloor.tier].blurb}</p>
+              <p className="font-display text-2xl text-cream">{tierInfo[activeTier].label}</p>
+              <p className="mt-1 text-sm text-cream-dim">{tierInfo[activeTier].blurb}</p>
 
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <div className="border border-ink-line p-3">

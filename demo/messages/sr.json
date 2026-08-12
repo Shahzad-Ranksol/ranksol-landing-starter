@@ -30,7 +30,7 @@
   "tour3d": {
     "eyebrow": "3D Interaktivni Model",
     "title": "Izaberite Svoju Perspektivu",
-    "body": "Prevucite za rotaciju kule, skrolujte za zumiranje, i kliknite na bilo koji nivo da vidite kolekciju, broj jedinica i dostupnost.",
+    "body": "Prevucite za rotaciju zgrade, skrolujte za zumiranje, i kliknite na oznaku da vidite broj jedinica i dostupnost te kolekcije.",
     "hint": "Prevuci za rotaciju · Skroluj za zum · Klikni za izbor",
     "levelDetails": "Detalji Nivoa",
     "units": "Rezidencije",

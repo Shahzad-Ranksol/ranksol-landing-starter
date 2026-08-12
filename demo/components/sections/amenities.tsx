@@ -1,8 +1,12 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { amenities, type Amenity } from "@/lib/data/amenities";
 import { Reveal } from "@/components/ui/reveal";
+
+const featured = amenities.find((a) => a.id === "aurora-pool")!;
+const rest = amenities.filter((a) => a.id !== "aurora-pool");
 
 const icons: Record<Amenity["icon"], React.ReactNode> = {
   pool: (
@@ -28,8 +32,24 @@ export function Amenities() {
         <p className="mt-4 text-cream-dim">{t("body")}</p>
       </Reveal>
 
+      <Reveal className="relative mb-px aspect-[16/9] overflow-hidden border border-ink-line md:aspect-[21/9]">
+        <Image
+          src="/images/amenity-pool.jpg"
+          alt={featured.name}
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent" />
+        <div className="absolute bottom-0 left-0 p-6 md:p-10">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-clay">{featured.level}</p>
+          <p className="mt-1 font-display text-2xl text-cream md:text-3xl">{featured.name}</p>
+          <p className="mt-2 max-w-md text-sm text-cream-dim">{featured.description}</p>
+        </div>
+      </Reveal>
+
       <div className="grid gap-px overflow-hidden border border-ink-line bg-ink-line sm:grid-cols-2 lg:grid-cols-3">
-        {amenities.map((amenity, i) => (
+        {rest.map((amenity, i) => (
           <Reveal key={amenity.id} delay={(i % 3) * 0.06} className="group bg-ink-soft p-7">
             <svg
               viewBox="0 0 24 24"

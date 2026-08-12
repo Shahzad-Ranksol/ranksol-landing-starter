@@ -163,17 +163,62 @@ Add `makeDefault` to `<OrbitControls makeDefault ... />` so `useThree().controls
 
 ## Recipe: hotspot markers (DOM overlay pinned to 3D position)
 
+Use this instead of per-mesh click detection whenever the model is a **single merged mesh** —
+the normal case for a scanned, photogrammetry-captured, or AI-generated (e.g. Hunyuan3D,
+Meshy) building: there's no separate geometry per floor/unit to attach `onClick` to, so a
+handful of hand-placed hotspots is the standard technique, not a fallback.
+
 ```tsx
 import { Html } from '@react-three/drei'
 
-<Html position={[2.4, 5.1, 0.8]} center distanceFactor={10} occlude>
-  <button className="hotspot-marker" onClick={() => onSelect('unit-4b')}>4B</button>
-</Html>
+function Hotspot({ position, label, onSelect }: { position: [number, number, number]; label: string; onSelect: () => void }) {
+  return (
+    <group position={position}>
+      {/* Visual only — the button below is the real hit target, see Common mistakes */}
+      <mesh>
+        <sphereGeometry args={[0.14, 16, 16]} />
+        <meshBasicMaterial color="#fff" />
+      </mesh>
+      <Html distanceFactor={10} occlude={false}>
+        <button onClick={onSelect} className="hotspot-marker">{label}</button>
+      </Html>
+    </group>
+  )
+}
 ```
 
-`occlude` hides the marker when geometry is in front of it (needs `occlude={[meshRefs]}` or
-`"blending"` mode for accurate occlusion against the whole scene — see drei docs); `distanceFactor`
-scales it down with camera distance so it doesn't dominate wide shots.
+`distanceFactor` scales the label down with camera distance so it doesn't dominate wide shots.
+`occlude` (hides the marker when geometry is in front of it, needs `occlude={[meshRefs]}` or
+`"blending"` mode — see drei docs) is worth adding once the base interaction works, but skip it
+initially — it's a polish detail, not required for the marker to function.
+
+## Recipe: WebGL context-loss recovery
+
+Rare on a typical visit, but real — GPU driver resets, too many WebGL contexts open across a
+browser session, thermal throttling. Without handling it, a lost context leaves a permanently
+blank canvas with no error and no way to recover short of a full page reload. three.js's own
+`WebGLRenderer` already calls `event.preventDefault()` internally on context loss (which is what
+tells the browser it's allowed to attempt restoration) — the app only needs to surface the
+interim state and let R3F re-render once `webglcontextrestored` fires:
+
+```tsx
+const [lost, setLost] = useState(false)
+
+const handleCreated = useCallback(({ gl }: { gl: THREE.WebGLRenderer }) => {
+  const canvas = gl.domElement
+  canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); setLost(true) })
+  canvas.addEventListener('webglcontextrestored', () => setLost(false))
+}, [])
+
+// <Canvas onCreated={handleCreated}>...</Canvas>
+// {lost && <div className="absolute inset-0 ...">Reconnecting 3D view…</div>}
+```
+
+Also lower baseline GPU pressure so loss is less likely in the first place: `dpr={1}` instead of
+`dpr={[1, 2]}` (biggest single lever — halves framebuffer resolution on retina displays),
+`gl={{ antialias: false }}` on stylized/toon-shaded scenes where MSAA isn't buying much visible
+quality, and `powerPreference: 'default'` rather than `'high-performance'` on a marketing page
+that doesn't need a discrete GPU forced on.
 
 ## Performance / LOD checklist
 
@@ -219,3 +264,13 @@ scales it down with camera distance so it doesn't dominate wide shots.
   component that imports the generated one, not inside the generated file.
 - **No loading state** — `Suspense` fallback is required; `useGLTF` suspends while fetching, and
   without a fallback the page shows nothing (or a layout jump) until the model arrives.
+- **Making a hotspot's visible label `pointer-events-none`, relying on the 3D sphere for clicks** —
+  confirmed directly in testing: the sphere's *projected* screen size at typical camera distance
+  is much smaller than the label text next to it, so users clicking the (visually obvious) label
+  miss the actual raycast target and the click falls through to `onPointerMissed`, silently
+  deselecting instead of selecting. Make the DOM label itself the `onClick` handler (plain DOM
+  hit-testing, pixel-accurate) and treat the 3D mesh as decoration only — don't rely on raycasting
+  a small sphere as the primary hit target.
+- **No WebGL context-loss handling** — confirmed directly in testing under real (if unusual)
+  browser conditions: a lost context leaves a permanently blank canvas with no console error
+  explaining why. See the context-loss recovery recipe above.

@@ -132,3 +132,15 @@ export function getFloorSummary(floorId: string) {
     maxPrice: prices.length ? Math.max(...prices) : null,
   };
 }
+
+export function getTierSummary(tierLabel: string) {
+  const tierUnits = units.filter((u) => u.tierLabel === tierLabel);
+  const available = tierUnits.filter((u) => u.availability === "available").length;
+  const prices = tierUnits.map((u) => u.price);
+  return {
+    unitCount: tierUnits.length,
+    available,
+    minPrice: prices.length ? Math.min(...prices) : null,
+    maxPrice: prices.length ? Math.max(...prices) : null,
+  };
+}

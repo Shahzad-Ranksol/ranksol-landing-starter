@@ -12,10 +12,14 @@ version: 1.0
 routing (`/en/...`, `/sr/...`), per-request message loading, and locale-aware navigation
 (`Link`/`router` that keep the current locale on internal links).
 
-⚠️ next-intl and Next.js both move fast on this surface (middleware/proxy naming, routing config
-shape). Verify the exact file name and API against the **installed** `next-intl` version's docs
-(via Context7 MCP if available) before relying on version-specific details below — the *shape*
-of the pattern is stable, exact symbol names churn.
+⚠️ **Next.js 16 renamed `middleware.ts` → `proxy.ts`** (confirmed against the framework's own
+bundled docs — `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/proxy.md`
+explicitly says the `middleware` convention is deprecated). The exported function can still be a
+default export with the old `(request) => response` signature — only the filename and the
+`config.matcher` placement changed, `createMiddleware(routing)` from `next-intl/middleware` still
+works unchanged inside it. This whole surface still moves fast — if the installed Next.js major
+version differs from 16, check that package's own bundled docs (or Context7 MCP) before trusting
+the filename below rather than assuming it's stayed `proxy.ts`.
 
 ## When to use
 
@@ -68,9 +72,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
 })
 ```
 
-Middleware (matches every path except static assets/API routes — check the current Next.js
-version's convention for the file name, `middleware.ts` at minimum, verify if that's since been
-renamed):
+`proxy.ts` at the project root (Next.js 15 and earlier: `middleware.ts`, same content) — matches
+every path except static assets/API routes:
 
 ```ts
 import createMiddleware from 'next-intl/middleware'

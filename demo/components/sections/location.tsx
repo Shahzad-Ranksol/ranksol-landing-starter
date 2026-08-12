@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { pois, poiCategoryLabel } from "@/lib/data/pois";
 import { Reveal } from "@/components/ui/reveal";
@@ -56,6 +57,14 @@ export function Location() {
         </div>
 
         <div className="relative aspect-square overflow-hidden border border-ink-line bg-ink-soft sm:aspect-[4/3]">
+          <Image
+            src="/images/location-skyline.jpg"
+            alt="Solmar Bay skyline at night"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-ink/55" />
           <svg className="absolute inset-0 h-full w-full opacity-20" aria-hidden>
             {Array.from({ length: 9 }, (_, i) => (
               <line key={`v${i}`} x1={`${(i + 1) * 10}%`} y1="0" x2={`${(i + 1) * 10}%`} y2="100%" stroke="#f4eee4" strokeWidth={1} />

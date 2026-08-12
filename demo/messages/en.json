@@ -30,7 +30,7 @@
   "tour3d": {
     "eyebrow": "3D Interactive Model",
     "title": "Select Your Perspective",
-    "body": "Drag to rotate the tower, scroll to zoom, and click any level to inspect its collection, unit count, and availability.",
+    "body": "Drag to rotate the building, scroll to zoom, and click a marker to inspect that collection's unit count and availability.",
     "hint": "Drag to rotate · Scroll to zoom · Click to select",
     "levelDetails": "Level Details",
     "units": "Residences",
