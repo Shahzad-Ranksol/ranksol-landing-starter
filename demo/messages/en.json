@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "residences": "Residences",
+    "tour3d": "3D Tour",
+    "amenities": "Amenities",
+    "location": "Location",
+    "inquire": "Inquire"
+  },
+  "hero": {
+    "eyebrow": "Est. 2026 — Solmar Bay",
+    "titleLine1": "Live Above",
+    "titleLine2": "the Ordinary.",
+    "sub": "Twelve levels of sculpted residences over Solmar Bay — where the skyline, the water, and your address become the same view.",
+    "cta": "Explore Residences",
+    "scrollHint": "Scroll"
+  },
+  "loading": {
+    "label": "Entering Meridian"
+  },
+  "about": {
+    "eyebrow": "The Architecture",
+    "title": "Sculpted, Not Stacked.",
+    "body1": "Meridian rises in three collections — Foundation, Crown, and Summit — each stepping back from the one below it, so every residence keeps its own uninterrupted sky.",
+    "body2": "Structural glass curtain walls wrap a cross-braced concrete core, freeing every floor plan from interior columns. The result: full-width living rooms and terraces on every level.",
+    "statLevels": "Residential Levels",
+    "statUnits": "Total Residences",
+    "statTerraces": "Have Private Terraces"
+  },
+  "tour3d": {
+    "eyebrow": "3D Interactive Model",
+    "title": "Select Your Perspective",
+    "body": "Drag to rotate the tower, scroll to zoom, and click any level to inspect its collection, unit count, and availability.",
+    "hint": "Drag to rotate · Scroll to zoom · Click to select",
+    "levelDetails": "Level Details",
+    "units": "Residences",
+    "availability": "Available",
+    "pricing": "Est. Pricing",
+    "viewUnits": "View Available Units"
+  },
+  "residences": {
+    "eyebrow": "Collection Directory",
+    "title": "Featured Residences",
+    "body": "Eight residences from the Foundation, Crown, and Summit collections — filter by tier and request blueprints for any available unit.",
+    "filterAll": "All",
+    "details": "Details",
+    "available": "Available",
+    "reserved": "Reserved",
+    "sold": "Sold",
+    "area": "Area",
+    "configuration": "Configuration",
+    "view": "View"
+  },
+  "amenities": {
+    "eyebrow": "Amenities",
+    "title": "Everything Above Ground Level.",
+    "body": "Six dedicated floors of wellness, culinary, and work spaces — designed so residents rarely need to leave the building."
+  },
+  "location": {
+    "eyebrow": "Site Location",
+    "title": "The Center of Solmar Bay",
+    "body": "Perfectly positioned between the waterfront and the business district, Meridian keeps culture, transit, and the bay within a short walk.",
+    "allPois": "All Points of Interest",
+    "walk": "walk",
+    "drive": "drive"
+  },
+  "contact": {
+    "eyebrow": "Private Viewing",
+    "title": "Request a Showing",
+    "body": "Share a few details and our residences team will follow up within one business day to arrange a private viewing.",
+    "name": "Full name",
+    "email": "Email address",
+    "phone": "Phone number",
+    "unitPreference": "Residence / tier preference (optional)",
+    "message": "Special inquiries or requests (optional)",
+    "messagePlaceholder": "Tell us about your timing, view preferences, or layout requirements…",
+    "consent": "I consent to the collection and secure processing of my personal details for the sole purpose of scheduling my private showing.",
+    "submit": "Send Secured Inquiry",
+    "demoNotice": "This is a demo form for skill-showcase purposes — no data is sent or stored."
+  },
+  "footer": {
+    "tagline": "A demonstration of the Ranksol interactive-landing-page skill set — every section below is built from a reusable Claude Code skill.",
+    "rights": "Demo build. Not a real offering.",
+    "project": "Project",
+    "location": "Location",
+    "skills": "Built With Skills"
+  }
+}

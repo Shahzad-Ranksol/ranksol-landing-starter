@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "overview": "Pregled",
+    "residences": "Rezidencije",
+    "tour3d": "3D Obilazak",
+    "amenities": "Sadržaji",
+    "location": "Lokacija",
+    "inquire": "Upit"
+  },
+  "hero": {
+    "eyebrow": "Osn. 2026 — Solmar Bay",
+    "titleLine1": "Živite Iznad",
+    "titleLine2": "Uobičajenog.",
+    "sub": "Dvanaest nivoa oblikovanih rezidencija iznad zaliva Solmar — gde horizont, voda i vaša adresa postaju isti pogled.",
+    "cta": "Istražite Rezidencije",
+    "scrollHint": "Skroluj"
+  },
+  "loading": {
+    "label": "Ulazak u Meridian"
+  },
+  "about": {
+    "eyebrow": "Arhitektura",
+    "title": "Oblikovano, Ne Naslagano.",
+    "body1": "Meridian se izdiže kroz tri kolekcije — Foundation, Crown i Summit — svaka pomerena unazad u odnosu na prethodnu, tako da svaka rezidencija zadržava sopstveno neprekinuto nebo.",
+    "body2": "Strukturalni stakleni omotač obavija ukršteno armirano betonsko jezgro, oslobađajući svaki plan sprata unutrašnjih stubova. Rezultat: dnevne sobe i terase pune širine na svakom nivou.",
+    "statLevels": "Stambenih Nivoa",
+    "statUnits": "Ukupno Rezidencija",
+    "statTerraces": "Ima Privatne Terase"
+  },
+  "tour3d": {
+    "eyebrow": "3D Interaktivni Model",
+    "title": "Izaberite Svoju Perspektivu",
+    "body": "Prevucite za rotaciju kule, skrolujte za zumiranje, i kliknite na bilo koji nivo da vidite kolekciju, broj jedinica i dostupnost.",
+    "hint": "Prevuci za rotaciju · Skroluj za zum · Klikni za izbor",
+    "levelDetails": "Detalji Nivoa",
+    "units": "Rezidencije",
+    "availability": "Dostupno",
+    "pricing": "Procenjena Cena",
+    "viewUnits": "Pogledaj Dostupne Jedinice"
+  },
+  "residences": {
+    "eyebrow": "Direktorijum Kolekcije",
+    "title": "Izdvojene Rezidencije",
+    "body": "Osam rezidencija iz Foundation, Crown i Summit kolekcija — filtrirajte po nivou i zatražite planove za bilo koju dostupnu jedinicu.",
+    "filterAll": "Sve",
+    "details": "Detalji",
+    "available": "Dostupno",
+    "reserved": "Rezervisano",
+    "sold": "Prodato",
+    "area": "Površina",
+    "configuration": "Konfiguracija",
+    "view": "Pogled"
+  },
+  "amenities": {
+    "eyebrow": "Sadržaji",
+    "title": "Sve Iznad Prizemlja.",
+    "body": "Šest posvećenih spratova za wellness, kulinarstvo i rad — projektovanih tako da stanari retko moraju da napuste zgradu."
+  },
+  "location": {
+    "eyebrow": "Lokacija Objekta",
+    "title": "Centar Solmar Zaliva",
+    "body": "Savršeno pozicioniran između priobalja i poslovnog distrikta, Meridian drži kulturu, prevoz i zaliv na kratkoj šetnji.",
+    "allPois": "Sve Tačke Interesovanja",
+    "walk": "peške",
+    "drive": "vožnja"
+  },
+  "contact": {
+    "eyebrow": "Privatna Poseta",
+    "title": "Zatražite Obilazak",
+    "body": "Podelite nekoliko detalja i naš tim za rezidencije će vas kontaktirati u roku od jednog radnog dana radi zakazivanja privatne posete.",
+    "name": "Ime i prezime",
+    "email": "Email adresa",
+    "phone": "Broj telefona",
+    "unitPreference": "Preferencija rezidencije / nivoa (opciono)",
+    "message": "Posebni upiti ili zahtevi (opciono)",
+    "messagePlaceholder": "Recite nam o vremenu poseta, preferencijama pogleda ili zahtevima za raspored…",
+    "consent": "Saglasan/na sam sa prikupljanjem i bezbednom obradom mojih ličnih podataka isključivo u svrhu zakazivanja privatne posete.",
+    "submit": "Pošalji Bezbedan Upit",
+    "demoNotice": "Ovo je demo forma u svrhu prikaza veština — podaci se ne šalju niti čuvaju."
+  },
+  "footer": {
+    "tagline": "Demonstracija Ranksol interactive-landing-page skill seta — svaka sekcija ispod je izgrađena od ponovo upotrebljive Claude Code veštine.",
+    "rights": "Demo verzija. Nije stvarna ponuda.",
+    "project": "Projekat",
+    "location": "Lokacija",
+    "skills": "Izgrađeno Uz Pomoć Veština"
+  }
+}

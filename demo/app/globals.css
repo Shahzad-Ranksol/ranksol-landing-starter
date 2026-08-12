@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0b0d0c;
+  --ink-soft: #14120e;
+  --ink-line: rgba(244, 238, 228, 0.12);
+  --cream: #f4eee4;
+  --cream-dim: rgba(244, 238, 228, 0.62);
+  --clay: #c1704a;
+  --clay-soft: rgba(193, 112, 74, 0.16);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-line: var(--ink-line);
+  --color-cream: var(--cream);
+  --color-cream-dim: var(--cream-dim);
+  --color-clay: var(--clay);
+  --color-clay-soft: var(--clay-soft);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-jetbrains);
+  --font-sans: var(--font-geist-sans);
+}
+
+html {
+  background: var(--ink);
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--clay);
+  color: var(--ink);
+}
+
+/* Custom cursor: real cursor hidden only once JS confirms pointer:fine + no reduced-motion */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+html.has-custom-cursor input,
+html.has-custom-cursor textarea {
+  cursor: text !important;
+}
+
+@media (max-width: 767px) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: auto !important;
+  }
+}
