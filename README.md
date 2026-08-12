@@ -41,12 +41,13 @@ client-asset checklist.
     interactive-map/             ← Mapbox GL JS, custom POI markers, distance/time panel
     cms-content-model/           ← Sanity/Payload schema for unit/floor/availability/POI/amenity
     perf-web/                    ← next/image, dynamic-import off critical path, CWV budget
+    cursor-interactions/         ← custom cursor, magnetic hover, mouse-driven parallax/camera drift
 docs/
   CLIENT-ASSET-CHECKLIST.md   ← send to the client before build starts
 README.md
 ```
 
-All 7 companion skills listed inside `interactive-landing-page` (§3) are built. The main skill
+All 8 companion skills listed inside `interactive-landing-page` (§3) are built. The main skill
 is the index; invoke the others by name when working on that specific part of the build.
 
 ## Keeping it current

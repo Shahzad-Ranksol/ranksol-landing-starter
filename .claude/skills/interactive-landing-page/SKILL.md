@@ -61,7 +61,8 @@ as the index; the others are the deep-dives you invoke per phase.
 5. `interactive-map` — Mapbox/Google Maps, custom POI markers, distance/time panel
 6. `cms-content-model` — Sanity/Payload schema: unit, floor, availability, POI, amenity
 7. `perf-web` — next/image + WebP, lazy loading, dynamic import of 3D, Lighthouse budget
-8. Built-in `frontend-design` (public skill) — visual direction, typography, non-templated look
+8. `cursor-interactions` — custom cursor with contextual labels, magnetic hover, mouse-driven parallax/camera drift — the "feels alive/present" layer, distinct from scroll choreography
+9. Built-in `frontend-design` (public skill) — visual direction, typography, non-templated look
 
 ---
 
