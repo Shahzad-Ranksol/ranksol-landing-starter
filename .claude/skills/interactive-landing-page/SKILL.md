@@ -109,5 +109,24 @@ as the index; the others are the deep-dives you invoke per phase.
 - [ ] Photography / renders in high-res (will convert to WebP)
 - [ ] Logo, brand colors, fonts, brand guidelines
 - [ ] Copy in every language (e.g. SRB + ENG), or who translates
-- [ ] POIs + walk/drive times for the location map
 - [ ] PDFs to link (permits, brochures), analytics/GTM ID, form → CRM/email destination
+
+**For the location map** (`interactive-map`):
+- [ ] Exact site address + coordinates (lat/lng)
+- [ ] Map provider preference — Mapbox (default) or Google Maps — and account/billing access,
+      or have the client create the account and invite the dev/agency
+- [ ] POI list: name, category (school/transit/shopping/etc.), coordinates, walk time, drive
+      time for each — this is authored data, not something Claude Code can source on its own
+- [ ] Brand-matched map style, if a stock Mapbox style isn't acceptable (Mapbox Studio access
+      or a style spec: colors, label density, POI icon set)
+
+**For the content model** (`cms-content-model`):
+- [ ] Who edits this data day-to-day — determines CMS (Sanity/Payload) vs static JSON; see the
+      decision table in `cms-content-model`
+- [ ] Full field list per content type actually needed: unit (number, floor, size, bedrooms,
+      price, availability, floor plan image), floor (label, level, plan image), amenity (name,
+      icon/photo, description) — confirm against what the client's sales team actually tracks,
+      don't assume the default schema covers it
+- [ ] If Sanity: who owns the Sanity project/org (client or agency), and whether editors need
+      accounts provisioned
+- [ ] If Payload: hosting/database target (the client's own Postgres, or one stood up for them)
