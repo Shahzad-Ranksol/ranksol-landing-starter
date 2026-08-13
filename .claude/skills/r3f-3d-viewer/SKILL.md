@@ -1,6 +1,6 @@
 ---
 name: r3f-3d-viewer
-description: Use when adding an interactive 3D building/product viewer to a Next.js marketing page with React Three Fiber — converting a client's .glb via gltfjsx, clickable floors/units, camera fly-to transitions, OrbitControls, or performance/LOD tuning for a 3D scene embedded in a page. Companion recipe skill to interactive-landing-page.
+description: Use when adding an interactive 3D building/product viewer to a Next.js marketing page with React Three Fiber — converting a client's .glb via gltfjsx, clickable floors/units, camera fly-to transitions, OrbitControls, day/night time-of-day lighting, minimap view-angle navigation, or performance/LOD tuning for a 3D scene embedded in a page. Companion recipe skill to interactive-landing-page.
 version: 1.0
 ---
 
@@ -220,6 +220,75 @@ Also lower baseline GPU pressure so loss is less likely in the first place: `dpr
 quality, and `powerPreference: 'default'` rather than `'high-performance'` on a marketing page
 that doesn't need a discrete GPU forced on.
 
+## Recipe: day/night time-of-day lighting
+
+Verified directly on a live reference (belgradearbor.rs/en/3d): a time slider relights the whole
+scene — interior windows switch on and glow, the sky/environment darkens, ambient light drops —
+turning a single static model into "see it at any hour," a genuinely compelling feature for a
+real-estate viewer (buyers care what the building looks like in the evening, lit up). Drive it
+by interpolating light intensities/colors and swapping an emissive map on window materials, keyed
+to a 0-24 slider value rather than building a full physically-based day/night cycle:
+
+```tsx
+function useDayNight(hour: number) {
+  // 0 = midnight, 12 = noon — smoothstep so dawn/dusk aren't linear cliffs
+  const dayness = THREE.MathUtils.smoothstep(hour, 6, 18) * (1 - THREE.MathUtils.smoothstep(hour, 18, 22))
+  return {
+    sunIntensity: THREE.MathUtils.lerp(0.1, 2, dayness),
+    ambientIntensity: THREE.MathUtils.lerp(0.15, 0.6, dayness),
+    skyColor: new THREE.Color().lerpColors(new THREE.Color('#0b1220'), new THREE.Color('#bcd9f2'), dayness),
+    windowEmissive: 1 - dayness, // windows glow warm as daylight fades
+  }
+}
+```
+
+```tsx
+const { sunIntensity, ambientIntensity, skyColor, windowEmissive } = useDayNight(hour)
+
+<color attach="background" args={[skyColor]} />
+<ambientLight intensity={ambientIntensity} />
+<directionalLight intensity={sunIntensity} position={[10, 15, 5]} />
+<mesh geometry={windowGeometry}>
+  <meshStandardMaterial emissive="#f4c97a" emissiveIntensity={windowEmissive} map={windowTexture} />
+</mesh>
+```
+
+Drive `hour` from a controlled slider (`<input type="range" min={0} max={24} />`), not an
+auto-playing clock, unless the brief specifically wants an ambient auto-cycle — a buyer exploring
+"what does 8pm look like" wants to land exactly there, not wait for a cycle to arrive.
+
+## Recipe: minimap navigation with view-angle presets
+
+Also verified on the same reference: a small top-corner floor-plan-style diagram (building
+footprint outline, camera position dots around it) lets users jump straight to a specific
+vantage point instead of manually orbiting to find it — pairs naturally with `floor-plan-viewer`'s
+SVG-hotspot pattern, just driving a camera position instead of a room-detail callout.
+
+```tsx
+const VIEW_ANGLES: { label: string; position: [number, number, number]; target: [number, number, number] }[] = [
+  { label: 'Entrance', position: [0, 3, 15], target: [0, 2, 0] },
+  { label: 'Aerial', position: [0, 40, 0.1], target: [0, 0, 0] },
+  { label: 'Street corner', position: [18, 4, 12], target: [4, 3, 0] },
+]
+
+function MinimapButton({ angle, onSelect }: { angle: typeof VIEW_ANGLES[number]; onSelect: () => void }) {
+  return (
+    <button
+      onClick={onSelect}
+      className="absolute h-2 w-2 rounded-full bg-cream/70 hover:bg-clay"
+      style={{ left: `${angle.mapX}%`, top: `${angle.mapY}%` }} // mapX/mapY: hand-placed to match the footprint diagram
+      aria-label={angle.label}
+    />
+  )
+}
+
+// on select: reuse the camera fly-to recipe above, tweening to angle.position/target
+```
+
+The footprint diagram itself is a simple SVG/CSS drawing of the building outline (matches
+`floor-plan-viewer`'s raster/SVG hotspot approach) — the minimap is not a live top-down render of
+the 3D scene, it's a flat 2D map with dots, which is both cheaper to build and easier to read.
+
 ## Performance / LOD checklist
 
 - **Compress the model**: `gltfjsx --transform` (Draco geometry + meshopt) before anything else.
@@ -247,6 +316,8 @@ that doesn't need a discrete GPU forced on.
 | Camera move on click | tween `camera.position` with GSAP, disable controls mid-tween |
 | DOM label pinned to 3D point | drei `<Html position={...}>` |
 | Preload model early | `useGLTF.preload(url)` at module scope |
+| "What does it look like at night" | Time-of-day slider driving light intensity + window emissive, not a full day/night cycle sim |
+| Jump straight to a known vantage point | Flat 2D minimap with hand-placed dots, reusing the camera fly-to recipe |
 
 ## Common mistakes
 
@@ -274,3 +345,9 @@ that doesn't need a discrete GPU forced on.
 - **No WebGL context-loss handling** — confirmed directly in testing under real (if unusual)
   browser conditions: a lost context leaves a permanently blank canvas with no console error
   explaining why. See the context-loss recovery recipe above.
+- **Auto-playing the day/night cycle when a buyer wants a specific hour** — a slider they control
+  is more useful than an ambient animation for "show me what it looks like at 8pm"; only
+  auto-cycle if the brief specifically wants ambient motion rather than an exploration tool.
+- **Making the minimap a live top-down render of the actual 3D scene** — expensive (effectively
+  a second camera/render pass) for something that's just meant to be a wayfinding diagram; a flat
+  SVG/CSS footprint with positioned dots reads just as clearly and costs nothing at render time.

@@ -48,6 +48,7 @@ client-asset checklist.
     scroll-image-sequence/       ← canvas scroll-scrubbed frame playback, an alternative to real 3D
     floor-plan-viewer/           ← interactive 2D floor plan, clickable rooms, unit selector overlay
     virtual-tour-360/            ← photographic 360° panorama viewer with scene-to-scene hotspots
+    zero-asset-scrollytelling/   ← illustrated SVG scenes + data viz, zero images/fonts, single-file
 demo/                         ← full working showcase app built from every skill above (see its README)
 docs/
   CLIENT-ASSET-CHECKLIST.md   ← send to the client before build starts

@@ -69,7 +69,7 @@ as the index; the others are the deep-dives you invoke per phase.
 12. Built-in `frontend-design` (public skill) — visual direction, typography, non-templated look
 
 Reference-pattern skills (verified against live sites, extend the above as new briefs come in):
-`belgrade-arbor-patterns`, `cinematic-video-sections`.
+`belgrade-arbor-patterns`, `cinematic-video-sections`, `zero-asset-scrollytelling`.
 
 ---
 

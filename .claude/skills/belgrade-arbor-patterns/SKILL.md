@@ -13,11 +13,16 @@ records what that site **actually does**, verified by inspecting its live networ
 rendered DOM directly — not assumed from the general genre. One finding here changes a default
 assumption the rest of the playbook makes, so read the "3D" section first.
 
-## ⚠️ It does not use a 3D model
+## ⚠️ Correction: the homepage has no 3D model, but a separate `/3d` route does
 
-Direct network inspection of belgradearbor.rs (80 requests captured on page load) found **zero**
-`.glb`/`.gltf`/Three.js chunk requests. There is no WebGL 3D viewer. The "explore the building"
-feeling is built from:
+An earlier version of this skill claimed belgradearbor.rs has no 3D at all — that was based on
+inspecting only the **homepage's** network requests (80 requests, zero `.glb`/`.gltf`/Three.js
+chunks confirmed there). It's true for the homepage. It's **wrong** for the site as a whole:
+`belgradearbor.rs/en/3d` is a separate, genuinely sophisticated real-time 3D viewer (confirmed by
+directly loading and interacting with it, not just inspecting requests). Lesson generalized: a
+"does this reference use 3D" check has to cover every route a brief might mean, not just `/`.
+
+The homepage's "explore the building" feeling, specifically, is built without 3D:
 
 - High-resolution `.webp` renders per section (`introduction/image1-4.webp`,
   `residences-options/1-4.webp`, `residences/residences-hero.webp`, etc.) — some served through
@@ -28,13 +33,21 @@ feeling is built from:
   see `scroll-animation`), not camera movement through a 3D scene.
 - A **static branded map image** (`home/mapc.webp`) with pin overlays, not a live Mapbox/Google
   Maps embed — confirms the "static, client-curated" option in `interactive-map` is not a
-  fallback compromise, it's what the reference itself ships.
+  fallback compromise, it's what the homepage itself ships.
 
-**Implication:** if a brief says "build something like belgradearbor.rs," a true interactive
-R3F 3D viewer (`r3f-3d-viewer`) is a genuine *upgrade* over the reference, not table stakes for
-matching it. It's still a legitimate, higher-effort differentiator — but don't assume the
-reference demands it, and don't undersell a build that skips it as "not matching the reference."
-Confirm which the client actually wants and has budget/assets for.
+The `/3d` route, by contrast, is a real interactive scene with features worth building toward —
+see the new day/night lighting and minimap-navigation recipes added to `r3f-3d-viewer` from this
+page directly: a time-of-day slider that relights the whole scene (glowing interior windows,
+dimmed sky, ambient shift) from a stylized daytime render to a night render, a minimap with
+per-angle view presets, live-animated cars/pedestrians even while otherwise static, and an
+integrated Properties/Filters panel overlaid on the canvas.
+
+**Implication:** if a brief says "build something like belgradearbor.rs," check *both* whether
+the homepage-style photography-driven approach or the `/3d`-style real-time viewer is what's
+actually being asked for — they're different pages on the same site, aimed at different moments
+in the user's journey (homepage sells the mood, `/3d` is the configurator). Don't assume 3D is
+out of scope just because the homepage skips it, and don't assume the reference's 3D bar is low
+just because the homepage's isn't — `/3d` is a high bar.
 
 ## Fonts: paid, self-hosted, not Google Fonts
 
@@ -81,4 +94,4 @@ whether they want the cinematic-but-slow version or a fast, decoupled counter
 | Static branded map image + pin overlay | `interactive-map` (static option) |
 | Self-hosted licensed display font | `nextjs-app-scaffold`, `frontend-design` |
 | GTM + Ads conversion + GA4 + Meta Pixel/CAPI + HubSpot | *(not yet a skill — ask before assuming a stack this size is in scope)* |
-| True 3D building viewer | Not present on the reference — `r3f-3d-viewer` is an upsell, confirm scope |
+| True 3D building viewer | Not on the homepage, but real and sophisticated on `/3d` — `r3f-3d-viewer` (day/night + minimap recipes) |
