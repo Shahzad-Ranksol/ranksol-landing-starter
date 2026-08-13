@@ -64,7 +64,9 @@ as the index; the others are the deep-dives you invoke per phase.
 7. `perf-web` — next/image + WebP, lazy loading, dynamic import of 3D, Lighthouse budget
 8. `cursor-interactions` — custom cursor with contextual labels, magnetic hover, mouse-driven parallax/camera drift — the "feels alive/present" layer, distinct from scroll choreography
 9. `scroll-image-sequence` — canvas-based scroll-scrubbed frame playback, an alternative to `r3f-3d-viewer` when the "3D" look can come from a pre-rendered camera path instead of a live scene
-10. Built-in `frontend-design` (public skill) — visual direction, typography, non-templated look
+10. `floor-plan-viewer` — interactive 2D floor plan: clickable rooms with dimensions, or a unit selector overlaid on a shared floor plate — the flat-plan complement to `r3f-3d-viewer`'s exterior model
+11. `virtual-tour-360` — photographic 360° panorama viewer with scene-to-scene hotspot navigation, built on the same R3F stack as `r3f-3d-viewer` — real interior photography, not a model or render
+12. Built-in `frontend-design` (public skill) — visual direction, typography, non-templated look
 
 Reference-pattern skills (verified against live sites, extend the above as new briefs come in):
 `belgrade-arbor-patterns`, `cinematic-video-sections`.
@@ -141,3 +143,17 @@ Reference-pattern skills (verified against live sites, extend the above as new b
 - [ ] If Sanity: who owns the Sanity project/org (client or agency), and whether editors need
       accounts provisioned
 - [ ] If Payload: hosting/database target (the client's own Postgres, or one stood up for them)
+
+**For floor plans** (`floor-plan-viewer`):
+- [ ] Per-unit floor plan files — ask for the architect's SVG/vector export with room boundaries
+      as separable layers/paths if at all possible; a flattened PNG/JPG works but forces manual
+      rectangular hotspot placement instead of exact room shapes
+- [ ] Room-level data: name and dimensions (m²) per room, per unit — authored data, confirm who
+      tracks it (architect, sales team)
+
+**For a 360° virtual tour** (`virtual-tour-360`):
+- [ ] Confirm real 360° photography exists or will be commissioned — this needs an actual
+      spherical/equirectangular photo shoot of finished or staged spaces, not a request Claude
+      Code can fulfill from renders or regular photography
+- [ ] Which rooms/scenes are in scope, and the intended navigation path between them (which
+      hotspot leads to which room) — authored by whoever plans the tour, not inferred

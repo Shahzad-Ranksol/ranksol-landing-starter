@@ -16,6 +16,16 @@ items block the hardest phases, so chase them first.
 - [ ] Who will edit this data day-to-day after launch? (sales team via a CMS, or dev/agency
       via code updates — determines whether we set up Sanity/Payload or keep it static)
 
+## Floor plans (if a per-unit interactive plan is in scope)
+- [ ] Architect's SVG/vector export per unit, with room boundaries as separate paths if
+      possible — a flattened image works but only supports approximate rectangular hotspots
+- [ ] Room name + dimensions (m²) for each room, per unit
+
+## 360° virtual tour (if in scope)
+- [ ] Confirm real 360°/spherical photography exists or will be shot — this is a real photo
+      shoot requirement, not something we can generate from renders or normal photography
+- [ ] Which rooms are included and the intended room-to-room navigation order
+
 ## Location map
 - [ ] Exact site address + coordinates
 - [ ] Points of interest: name, category (school/transit/shopping/etc.), and walk + drive time
