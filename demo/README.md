@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meridian — Skill Showcase Demo
 
-## Getting Started
+A fictional premium real-estate property ("Meridian," Solmar Bay) built to demonstrate every
+skill in `.claude/skills/` end to end, not just describe them. Not a real client project — no
+data submitted through the contact form is sent or stored (see `CREDITS.md`).
 
-First, run the development server:
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3411](http://localhost:3411) — the dev script is set up for that port,
+adjust with `npm run dev -- -p <port>` if it's taken.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What's demonstrated where
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Skill | Where in this app |
+|---|---|
+| `nextjs-app-scaffold` | `app/[locale]/`, `components/`, `lib/` folder structure |
+| `scroll-animation` | `components/ui/preloader.tsx`, `components/sections/hero.tsx` (parallax) |
+| `r3f-3d-viewer` | `components/three/` — real CC-BY `.glb`, Draco-compressed, hotspot markers |
+| `i18n-nextintl` | `app/[locale]/`, `i18n/`, `messages/en.json` + `messages/sr.json` |
+| `interactive-map` | `components/sections/location.tsx` — stylized POI diagram |
+| `cms-content-model` | `lib/data/` — static JSON shaped like a real CMS schema |
+| `perf-web` | `next/image` usage throughout, dynamic-imported 3D viewer |
+| `cursor-interactions` | `components/providers/cursor-provider.tsx`, `magnetic-button.tsx` |
 
-## Learn More
+## Known deployment note
 
-To learn more about Next.js, take a look at the following resources:
+Production builds must use `next build --webpack` (already set in `package.json`) —
+`next build`'s Turbopack default currently ships a broken production deployment on Vercel
+(builds succeed, every route 404s). See the `i18n-nextintl` skill for details if this needs
+re-checking against a newer Next.js version.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Credits
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Real photography and the 3D model are third-party — see `CREDITS.md` for sources and licenses.

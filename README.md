@@ -42,12 +42,17 @@ client-asset checklist.
     cms-content-model/           ← Sanity/Payload schema for unit/floor/availability/POI/amenity
     perf-web/                    ← next/image, dynamic-import off critical path, CWV budget
     cursor-interactions/         ← custom cursor, magnetic hover, mouse-driven parallax/camera drift
+    belgrade-arbor-patterns/     ← verified (not assumed) patterns from the belgradearbor.rs reference
+    cinematic-video-sections/    ← HLS background video, scroll text reveal, pinned card cycling
+demo/                         ← full working showcase app built from every skill above (see its README)
 docs/
   CLIENT-ASSET-CHECKLIST.md   ← send to the client before build starts
 README.md
 ```
 
-All 8 companion skills listed inside `interactive-landing-page` (§3) are built. The main skill
+All 8 companion skills listed inside `interactive-landing-page` (§3) are built, plus two
+reference-pattern skills (verified against live sites, not assumed) that extend them as new
+briefs come in. The main skill
 is the index; invoke the others by name when working on that specific part of the build.
 
 ## Keeping it current
