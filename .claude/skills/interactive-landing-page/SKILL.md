@@ -54,6 +54,7 @@ stack manually (section 2).
 Add these as `.md` skill files under `.claude/skills/` (or your skills dir). Keep this file
 as the index; the others are the deep-dives you invoke per phase.
 
+0. `landing-page-discovery` — **run first, every project** — asks visual mood, motion intensity, hero mechanism, and asset availability instead of defaulting to the same look each time
 1. `nextjs-app-scaffold` — App Router layout, TS/Tailwind config, folder conventions, Vercel env
 2. `scroll-animation` — Lenis + GSAP ScrollTrigger + Framer Motion recipes (intro 0→100 counter, parallax layers, pinned/horizontal-scroll sections, reveal-on-scroll)
 3. `r3f-3d-viewer` — R3F scene, GLTF loading via gltfjsx, clickable floors/units, OrbitControls, camera transitions, LOD/perf
@@ -62,7 +63,11 @@ as the index; the others are the deep-dives you invoke per phase.
 6. `cms-content-model` — Sanity/Payload schema: unit, floor, availability, POI, amenity
 7. `perf-web` — next/image + WebP, lazy loading, dynamic import of 3D, Lighthouse budget
 8. `cursor-interactions` — custom cursor with contextual labels, magnetic hover, mouse-driven parallax/camera drift — the "feels alive/present" layer, distinct from scroll choreography
-9. Built-in `frontend-design` (public skill) — visual direction, typography, non-templated look
+9. `scroll-image-sequence` — canvas-based scroll-scrubbed frame playback, an alternative to `r3f-3d-viewer` when the "3D" look can come from a pre-rendered camera path instead of a live scene
+10. Built-in `frontend-design` (public skill) — visual direction, typography, non-templated look
+
+Reference-pattern skills (verified against live sites, extend the above as new briefs come in):
+`belgrade-arbor-patterns`, `cinematic-video-sections`.
 
 ---
 
@@ -82,6 +87,11 @@ as the index; the others are the deep-dives you invoke per phase.
 
 ## 5. Build roadmap (phase order)
 
+0. **Discovery** (`landing-page-discovery`) — **required, not optional**, before any other
+   phase. Ask, don't assume: visual mood, motion intensity, which hero mechanism (real 3D /
+   image sequence / photography-only), and what assets actually exist. Confirmed directly in
+   this repo: skipping this step is why unrelated projects built from this same playbook have
+   come out looking near-identical.
 1. **Scaffold** — clone Satus (or create-next-app + stack). Set up i18n routing, root layout, nav, footer, Lenis provider.
 2. **Content model** — decide CMS vs static JSON. Define: unit, floor, availability, POI, amenity, installment step. Seed dummy data.
 3. **Design system** — colors, type scale, spacing, motion tokens (via `frontend-design`). Distinct identity, not a template look.

@@ -34,6 +34,7 @@ client-asset checklist.
 .claude/
   skills/
     interactive-landing-page/   ← the playbook (stack, roadmap, MCPs, asset checklist)
+    landing-page-discovery/     ← run FIRST, every project — ask before defaulting to the same look
     nextjs-app-scaffold/        ← App Router folder conventions, TS/Tailwind config, Vercel env
     scroll-animation/           ← Lenis + GSAP ScrollTrigger + Framer Motion recipes
     r3f-3d-viewer/               ← R3F/GLTF viewer: gltfjsx, clickable meshes, camera, perf
@@ -44,16 +45,18 @@ client-asset checklist.
     cursor-interactions/         ← custom cursor, magnetic hover, mouse-driven parallax/camera drift
     belgrade-arbor-patterns/     ← verified (not assumed) patterns from the belgradearbor.rs reference
     cinematic-video-sections/    ← HLS background video, scroll text reveal, pinned card cycling
+    scroll-image-sequence/       ← canvas scroll-scrubbed frame playback, an alternative to real 3D
 demo/                         ← full working showcase app built from every skill above (see its README)
 docs/
   CLIENT-ASSET-CHECKLIST.md   ← send to the client before build starts
 README.md
 ```
 
-All 8 companion skills listed inside `interactive-landing-page` (§3) are built, plus two
-reference-pattern skills (verified against live sites, not assumed) that extend them as new
-briefs come in. The main skill
-is the index; invoke the others by name when working on that specific part of the build.
+All 10 companion skills listed inside `interactive-landing-page` (§3) are built — including
+`landing-page-discovery`, which runs first on every project so builds stop defaulting to the
+same look — plus two reference-pattern skills (verified against live sites, not assumed) that
+extend them as new briefs come in. The main skill is the index; invoke the others by name when
+working on that specific part of the build.
 
 ## Keeping it current
 
